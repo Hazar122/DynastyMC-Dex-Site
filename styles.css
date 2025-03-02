@@ -1,0 +1,119 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem;
+}
+
+#search {
+    margin-top: 10px;
+    padding: 8px;
+    width: 80%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#mons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* This prevents cards from matching height */
+}
+
+.mon-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px;
+    width: 250px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mon-card h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.mon-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Type Styles */
+.type-section {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.type-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    margin: 3px;
+    border-radius: 15px;
+    white-space: nowrap;
+}
+
+.type-label img {
+    width: 20px;
+    height: 20px;
+}
+
+.type-label .type-text {
+    color: #FFF;
+    margin-left: 10px;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Type Colors */
+:root {
+    --normal-color: #A8A77A;
+    --fire-color: #EE8130;
+    --water-color: #6390F0;
+    --electric-color: #F7D02C;
+    --grass-color: #7AC74C;
+    --ice-color: #96D9D6;
+    --fighting-color: #C22E28;
+    --poison-color: #A33EA1;
+    --ground-color: #E2BF65;
+    --flying-color: #A98FF3;
+    --psychic-color: #F95587;
+    --bug-color: #A6B91A;
+    --rock-color: #B6A136;
+    --ghost-color: #735797;
+    --dragon-color: #6F35FC;
+    --dark-color: #705746;
+    --steel-color: #B7B7CE;
+    --fairy-color: #D685AD;
+}
+
+.type-normal { background: linear-gradient(105deg, var(--normal-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-fire { background: linear-gradient(105deg, var(--fire-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-water { background: linear-gradient(105deg, var(--water-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-electric { background: linear-gradient(105deg, var(--electric-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-grass { background: linear-gradient(105deg, var(--grass-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-ice { background: linear-gradient(105deg, var(--ice-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-fighting { background: linear-gradient(105deg, var(--fighting-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-poison { background: linear-gradient(105deg, var(--poison-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-ground { background: linear-gradient(105deg, var(--ground-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-flying { background: linear-gradient(105deg, var(--flying-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-psychic { background: linear-gradient(105deg, var(--psychic-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-bug { background: linear-gradient(105deg, var(--bug-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-rock { background: linear-gradient(105deg, var(--rock-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-ghost { background: linear-gradient(105deg, var(--ghost-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-dragon { background: linear-gradient(105deg, var(--dragon-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-dark { background: linear-gradient(105deg, var(--dark-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-steel { background: linear-gradient(105deg, var(--steel-color) 30px, #5A5A5A 31px, #5A5A5A); }
+.type-fairy { background: linear-gradient(105deg, var(--fairy-color) 30px, #5A5A5A 31px, #5A5A5A); }
