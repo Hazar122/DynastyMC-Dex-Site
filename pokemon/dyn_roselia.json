@@ -6,12 +6,12 @@
     "evolves_to": "Roserade (Dynastian)",
     "abilities": ["Natural Cure", "Poison Point", "Refrigerate (Hidden)"],
     "stats": {
-        "hp": 0,
-        "atk": 0,
-        "def": 0,
-        "spa": 0,
-        "spd": 0,
-        "spe": 0
+        "hp": 50,
+        "atk": 60,
+        "def": 45,
+        "spa": 100,
+        "spd": 80,
+        "spe": 65
     },
     "moves": [
         { "name": "Absorb", "method": "Level 1" },
