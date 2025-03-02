@@ -1,0 +1,24 @@
+{
+    "name": "",
+    "form": "",
+    "types": ["", ""],
+    "evolves_from": "",
+    "evolves_to": "",
+    "abilities": ["", ""],
+    "stats": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 0
+    },
+    "moves": [
+        {"name": "", "method": "Level 1"},
+        {"name": "", "method": "Level 100"}
+    ],
+    "spawn_data": [
+        "",
+        ""
+    ]
+}

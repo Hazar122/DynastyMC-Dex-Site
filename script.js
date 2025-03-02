@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function fetchMons() {
         try {
             const response = await fetch("pokemon/index.json"); // Fetch the list of JSON files in the folder
-            const fileNames = await response.json(); // Assuming the server returns a JSON array of filenames
+            const fileNames = await response.json();
             
             const mons = await Promise.all(
                 fileNames.map(async (fileName) => {
@@ -34,13 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     <small class='move-method' style='display: block; color: gray;'>(${m.method})</small>
                 </div>`).join("")}</div>`;
             
-                let spawnInfo = mon.spawn_data ? 
-                `<div class='spawn-data' style="display: grid; grid-template-columns: auto auto; gap: 5px; text-align: left;">
-                    <div><strong>Biome:</strong> ${mon.spawn_data.biome}</div>
-                    <div><strong>Time:</strong> ${mon.spawn_data.time}</div>
-                    <div><strong>Rarity:</strong> ${mon.spawn_data.rarity}</div>
-                </div>` 
+            let spawnInfo = mon.spawn_data && Array.isArray(mon.spawn_data) 
+                ? `<div class='spawn-data' style='text-align: left;'>${mon.spawn_data.map(data => `<p>${data}</p>`).join("")}</div>`
                 : "N/A";
+            
             let evolutionInfo = mon.evolves_from ? `Evolves from: ${mon.evolves_from}` : "Base form";
             let formInfo = mon.form ? mon.form : "Standard";
             
@@ -80,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     ${createStatRow("Sp. Def", mon.stats.spd, "#98D8D8")}
                     ${createStatRow("Speed", mon.stats.spe, "#C03028")}`)}
                 <hr>
-                ${createCollapsibleSection("Spawn Data", `<div class='spawn-data' style='text-align: left;'>${spawnInfo}</div>`)}
+                ${createCollapsibleSection("Spawn Data", spawnInfo)}
             `;
             monsContainer.appendChild(monCard);
         });
@@ -125,8 +122,5 @@ document.addEventListener("DOMContentLoaded", () => {
             card.style.display = name.includes(searchTerm) ? "block" : "none";
         });
     });
-
-
-
 
 });

@@ -103,9 +103,7 @@
         { "name": "Sweet Kiss", "method": "Level 100" },
         { "name": "Worry Seed", "method": "Level 100" }
     ],
-    "spawn_data": {
-        "biome": "Unknown",
-        "time": "Unknown",
-        "rarity": "Unknown"
-    }
+    "spawn_data": [
+        "Uncommon spawn found in Snowy Forests or Snowy Taigas with a skylight level of 8-15"
+    ]
 }
