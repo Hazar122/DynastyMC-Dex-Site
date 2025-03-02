@@ -2,7 +2,7 @@
     "name": "Roserade",
     "form": "Dynastian",
     "types": ["Ice", "Poison"],
-    "evolves_from": "Roselia (Dynastian)",
+    "evolves_from": "Roselia (Dynastian) with an Ice Stone",
     "abilities": ["Natural Cure", "Poison Point", "Refrigerate (Hidden)"],
     "stats": {
         "hp": 60,

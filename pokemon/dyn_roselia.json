@@ -2,7 +2,7 @@
     "name": "Roselia",
     "form": "Dynastian",
     "types": ["Ice", "Poison"],
-    "evolves_from": "Budew (Dynastian)",
+    "evolves_from": "Budew (Dynastian) at night with high friendship",
     "evolves_to": "Roserade (Dynastian)",
     "abilities": ["Natural Cure", "Poison Point", "Refrigerate (Hidden)"],
     "stats": {
