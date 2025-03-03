@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchMons() {
         try {
-            const response = await fetch("pokemon/index.json"); // Fetch the list of JSON files in the folder
+            const response = await fetch("pokemon/index.json"); 
             const fileNames = await response.json();
             
             const mons = await Promise.all(
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
             );
 
-            displayMons(mons);
+            displayMons(mons, fileNames);
         } catch (error) {
             console.error("Error loading Pokémon data:", error);
         }
@@ -22,11 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetchMons();
 
-    function displayMons(mons) {
+    function displayMons(mons, fileNames) {
         monsContainer.innerHTML = "";
-        mons.forEach(mon => {
+        mons.forEach((mon, index) => {
             const monCard = document.createElement("div");
             monCard.classList.add("mon-card");
+        
+            let imageFileName = fileNames[index].replace(".json", "");
+            let imagePath = `pokemon/images/${imageFileName}.png`;
+            let imageElement = `
+                <div class="mon-image-container">
+                    <img src="${imagePath}" alt="${mon.name}" class="mon-image" onload="this.parentElement.style.display='flex';" onerror="this.parentElement.remove();">
+                </div>
+            `;
+
             
             let movesList = `<div class='move-grid' style='display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; text-align: left;'>${mon.moves.map(m => `
                 <div class='move-item' style='padding: 5px; border-radius: 5px; background: #f1f1f1; text-align: center;'>
@@ -56,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
             `).join(" ");
             
             monCard.innerHTML = `
+                ${imageElement}
                 <h2 style='margin-bottom: 5px;'>${mon.name}<br><span style='font-size: 18px; font-weight: bold;'>${formInfo}</span></h2>
                 <div class='type-section' style='text-align: center; margin: 10px 0;'>${typeIcons}</div>
                 <p><strong>${evolutionInfo}</strong></p>
@@ -80,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ${createCollapsibleSection("Spawn Data", spawnInfo)}
             `;
             monsContainer.appendChild(monCard);
+            
         });
 
         document.querySelectorAll(".collapsible-header").forEach(header => {
