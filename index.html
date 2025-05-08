@@ -9,16 +9,21 @@
 <body>
     <header>
         <h1>DynastyMC Dex</h1>
-        <input type="text" id="search" placeholder="Search Pokémon...">
-    </header>
+        <div class="search-wrapper">
+          <input type="text" id="search" placeholder="Search Pokémon..." />
+        </div>
+      </header>
     <main>
-        <div id="mons-container"></div>
+        <div id="mons-container" class="grid">
+            <div class="grid-sizer"></div> <!-- Masonry column width base -->
+        </div>
     </main>
     <footer>
         <p>This is fan made and is not official by DynastyMC</p>
         <p>&copy; 2025, All rights reserved. </p>
     </footer>
 
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

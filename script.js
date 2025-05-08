@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchMons() {
         try {
-            const response = await fetch("pokemon/index.json"); 
+            const response = await fetch("pokemon/index.json");
             const fileNames = await response.json();
-            
+
             const mons = await Promise.all(
                 fileNames.map(async (fileName) => {
                     const res = await fetch(`pokemon/${fileName}`);
@@ -15,6 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             displayMons(mons, fileNames);
+
+            setTimeout(() => {
+                window.MasonryInstance = new Masonry('#mons-container', {
+                    itemSelector: '.mon-card',
+                    columnWidth: '.grid-sizer',
+                    gutter: 25,
+                    percentPosition: true,
+                    fitWidth: true
+                });
+            }, 100);
+
         } catch (error) {
             console.error("Error loading Pokémon data:", error);
         }
@@ -23,11 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchMons();
 
     function displayMons(mons, fileNames) {
-        monsContainer.innerHTML = "";
+        monsContainer.innerHTML = '<div class="grid-sizer"></div>';
         mons.forEach((mon, index) => {
             const monCard = document.createElement("div");
             monCard.classList.add("mon-card");
-        
+
             let imageFileName = fileNames[index].replace(".json", "");
             let imagePath = `pokemon/images/${imageFileName}.png`;
             let imageElement = `
@@ -36,20 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            
             let movesList = `<div class='move-grid' style='display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; text-align: left;'>${mon.moves.map(m => `
                 <div class='move-item' style='padding: 5px; border-radius: 5px; background: #f1f1f1; text-align: center;'>
                     <span class='move-name' style='font-weight: bold;'>${m.name}</span>
                     <small class='move-method' style='display: block; color: gray;'>(${m.method})</small>
                 </div>`).join("")}</div>`;
-            
-            let spawnInfo = mon.spawn_data && Array.isArray(mon.spawn_data) 
+
+            let spawnInfo = mon.spawn_data && Array.isArray(mon.spawn_data)
                 ? `<div class='spawn-data' style='text-align: left;'>${mon.spawn_data.map(data => `<p>${data}</p>`).join("")}</div>`
                 : "N/A";
-            
+
             let evolutionInfo = mon.evolves_from ? `Evolves from: ${mon.evolves_from}` : "Base form";
             let formInfo = mon.form ? mon.form : "Standard";
-            
+
             let typeIcons = mon.types.map(type => `
                 <span class='type-label' style="
                     background: linear-gradient(105deg, var(--${type.toLowerCase()}-color, #AAA) 30px, #5A5A5A 31px, #5A5A5A);
@@ -63,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class='type-text' style='color: #FFF; min-width: 50px; text-align: center;'>${type}</span>
                 </span>
             `).join(" ");
-            
+
             monCard.innerHTML = `
                 ${imageElement}
                 <h2 style='margin-bottom: 5px;'>${mon.name}<br><span style='font-size: 18px; font-weight: bold;'>${formInfo}</span></h2>
@@ -90,13 +100,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 ${createCollapsibleSection("Spawn Data", spawnInfo)}
             `;
             monsContainer.appendChild(monCard);
-            
         });
 
         document.querySelectorAll(".collapsible-header").forEach(header => {
             header.addEventListener("click", function () {
                 const content = this.nextElementSibling;
-                content.style.display = content.style.display === "none" ? "block" : "none";
+                const arrow = this.querySelector(".toggle-arrow");
+
+                if (content.classList.contains("open")) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.classList.remove("open");
+                    requestAnimationFrame(() => {
+                        content.style.maxHeight = "0px";
+                        if (window.MasonryInstance) window.MasonryInstance.layout();
+                    });
+                    arrow.textContent = "▼";
+                } else {
+                    content.classList.add("open");
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    if (window.MasonryInstance) window.MasonryInstance.layout();
+                    arrow.textContent = "▲";
+                }
+
+                content.addEventListener("transitionend", () => {
+                    if (window.MasonryInstance) window.MasonryInstance.layout();
+                    if (content.classList.contains("open")) {
+                        content.style.maxHeight = "none";
+                    }
+                }, { once: true });
             });
         });
     }
@@ -108,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span>${title}</span>
                     <span class="toggle-arrow">▼</span>
                 </div>
-                <div class="collapsible-content" style="padding: 10px; display: none;">${content}</div>
+                <div class="collapsible-content">${content}</div>
             </div>
         `;
     }
@@ -133,5 +164,4 @@ document.addEventListener("DOMContentLoaded", () => {
             card.style.display = name.includes(searchTerm) ? "block" : "none";
         });
     });
-
 });
